@@ -5,7 +5,7 @@
 
 An [mdBook](https://github.com/rust-lang/mdBook) preprocessor that creates language tabs for code examples.
 
-![Language tabs example demo](demo.gif)
+![Language tabs example demo](https://raw.githubusercontent.com/nx10/mdbook-langtabs/refs/heads/main/demo.gif)
 
 ## Features
 
