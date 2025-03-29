@@ -63,17 +63,12 @@ fn main() {
 ```python
 def main():
     print("Hello from Python!")
-
-if __name__ == "__main__":
-    main()
 ```
 
 ```javascript
 function main() {
     console.log("Hello from JavaScript!");
 }
-
-main();
 ```
 <!-- langtabs-end -->
 ````
