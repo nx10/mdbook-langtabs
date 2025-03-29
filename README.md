@@ -5,6 +5,14 @@
 
 An [mdBook](https://github.com/rust-lang/mdBook) preprocessor that creates language tabs for code examples.
 
+![Language tabs example demo](demo.gif)
+
+## Features
+
+- Switch between language examples without scrolling
+- Automatic language icons via [Devicon](https://devicon.dev/)
+- Remembers selected language preference
+
 ## Installation
 
 ```bash
@@ -70,15 +78,7 @@ main();
 <!-- langtabs-end -->
 ````
 
-This creates tabbed code examples that readers can switch between:
-
-![Language tabs example demo](demo.gif)
-
-## Features
-
-- Switch between language examples without scrolling
-- Automatic language icons via [Devicon](https://devicon.dev/)
-- Remembers selected language preference
+This creates tabbed code examples that readers can switch between, as shown in the demo above.
 
 ## License
 

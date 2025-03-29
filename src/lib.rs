@@ -6,6 +6,12 @@ mod preprocessor;
 
 pub struct LangTabsPreprocessor;
 
+impl Default for LangTabsPreprocessor {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl LangTabsPreprocessor {
     pub fn new() -> Self {
         LangTabsPreprocessor
