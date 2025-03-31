@@ -1,6 +1,6 @@
 [package]
 name = "mdbook-langtabs"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "An mdbook preprocessor that adds language tabs for code blocks"
 license = "MIT"
