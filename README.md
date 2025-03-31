@@ -7,11 +7,12 @@ An [mdBook](https://github.com/rust-lang/mdBook) preprocessor that creates langu
 
 ![Language tabs example demo](https://raw.githubusercontent.com/nx10/mdbook-langtabs/refs/heads/main/demo.gif)
 
+Also check out the [live demo](https://nx10.github.io/mdbook-langtabs/).
+
 ## Features
 
 - Switch between language examples without scrolling
 - Automatic language icons via [Devicon](https://devicon.dev/)
-- Remembers selected language preference
 
 ## Installation
 

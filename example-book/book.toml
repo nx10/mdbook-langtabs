@@ -1,0 +1,6 @@
+[book]
+authors = ["Your Name"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Example Book"
