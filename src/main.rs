@@ -103,14 +103,16 @@ fn install_preprocessor(dir: &PathBuf) -> Result<(), Error> {
     let mut toml_doc = fs::read_to_string(&toml_path)?.parse::<toml_edit::DocumentMut>()?;
 
     // Check if the langtabs preprocessor is already configured
-    let preprocessor_installed = toml_doc.get("preprocessor")
+    let preprocessor_installed = toml_doc
+        .get("preprocessor")
         .and_then(|p| p.as_table())
         .and_then(|t| t.get(LANGTABS))
         .is_some();
 
     if !preprocessor_installed {
         // Get or create the preprocessor table
-        let preprocessor_table = toml_doc.entry("preprocessor")
+        let preprocessor_table = toml_doc
+            .entry("preprocessor")
             .or_insert_with(|| {
                 let mut table = toml_edit::Table::new();
                 table.set_implicit(true);
@@ -118,9 +120,10 @@ fn install_preprocessor(dir: &PathBuf) -> Result<(), Error> {
             })
             .as_table_mut()
             .unwrap();
-        
+
         // Get or create the langtabs table inside the preprocessor table
-        let langtabs_table = preprocessor_table.entry(LANGTABS)
+        let langtabs_table = preprocessor_table
+            .entry(LANGTABS)
             .or_insert_with(|| {
                 let mut table = toml_edit::Table::new();
                 table.set_implicit(true);
@@ -128,7 +131,7 @@ fn install_preprocessor(dir: &PathBuf) -> Result<(), Error> {
             })
             .as_table_mut()
             .unwrap();
-        
+
         langtabs_table["command"] = toml_edit::value(MDBOOK_LANGTABS);
         println!("Added preprocessor config to book.toml");
     } else {

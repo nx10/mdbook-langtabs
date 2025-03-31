@@ -48,19 +48,19 @@ struct LanguageSection {
 // Extract language sections using a simple state machine
 fn extract_language_sections(content: &str) -> Vec<LanguageSection> {
     let mut sections: Vec<LanguageSection> = Vec::new();
-    
+
     // Split the content into lines
     let lines: Vec<&str> = content.lines().collect();
-    
+
     // Regex for detecting code block start and end
     let start_block_regex = Regex::new(r"^```([a-zA-Z0-9_+-]+)\s*$").unwrap();
     let end_block_regex = Regex::new(r"^```\s*$").unwrap();
-    
+
     // State machine variables
     let mut in_code_block = false;
     let mut current_language = String::new();
     let mut current_content = Vec::new();
-    
+
     for line in lines {
         if !in_code_block {
             // Check if this line starts a code block
@@ -73,7 +73,7 @@ fn extract_language_sections(content: &str) -> Vec<LanguageSection> {
         } else {
             // We're in a code block, add the line
             current_content.push(line.to_string());
-            
+
             // Check if this line ends the code block
             if end_block_regex.is_match(line) {
                 // Add the completed section
@@ -81,7 +81,7 @@ fn extract_language_sections(content: &str) -> Vec<LanguageSection> {
                     language: languages::ProgrammingLanguage::from_str(&current_language),
                     content: current_content.join("\n"),
                 });
-                
+
                 // Reset state
                 in_code_block = false;
                 current_language = String::new();
@@ -89,7 +89,7 @@ fn extract_language_sections(content: &str) -> Vec<LanguageSection> {
             }
         }
     }
-    
+
     // In case the last block wasn't properly closed
     if in_code_block && !current_content.is_empty() {
         sections.push(LanguageSection {
@@ -97,7 +97,7 @@ fn extract_language_sections(content: &str) -> Vec<LanguageSection> {
             content: current_content.join("\n"),
         });
     }
-    
+
     sections
 }
 
@@ -106,7 +106,7 @@ fn generate_tabs_html(sections: &[LanguageSection]) -> String {
         return String::new();
     }
 
-    let mut html = format!(r#"<div class="langtabs">"#);
+    let mut html = r#"<div class="langtabs">"#.to_string();
 
     // Generate tab headers
     html.push_str(r#"<div class="langtabs-header">"#);
@@ -119,10 +119,10 @@ fn generate_tabs_html(sections: &[LanguageSection]) -> String {
 
         html.push_str(&format!(
             r#"<button class="{}" data-lang="{}-{}"><i class="langtabs-icon {}"></i>{}</button>"#,
-            class, 
-            section.language.to_identifier(), 
+            class,
+            section.language.to_identifier(),
             i,
-            section.language.icon_class(), 
+            section.language.icon_class(),
             section.language.display_name(),
         ));
     }
@@ -142,13 +142,15 @@ fn generate_tabs_html(sections: &[LanguageSection]) -> String {
         html.push_str("\n\n");
         html.push_str(&format!(
             r#"<div class="{}" data-lang="{}-{}">"#,
-            class, section.language.to_identifier(), i
+            class,
+            section.language.to_identifier(),
+            i
         ));
         html.push_str("\n\n");
 
         // Insert the raw markdown content
         html.push_str(&section.content);
-        
+
         html.push_str("\n\n</div>");
     }
     html.push_str("</div>");

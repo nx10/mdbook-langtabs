@@ -1,4 +1,3 @@
-
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ProgrammingLanguage {
     Apache,
@@ -100,7 +99,7 @@ impl ProgrammingLanguage {
             _ => Self::Unknown(lang.to_string()),
         }
     }
-    
+
     pub fn to_identifier(&self) -> String {
         match self {
             Self::Apache => "apache",
@@ -149,7 +148,8 @@ impl ProgrammingLanguage {
             Self::Xml => "xml",
             Self::Yaml => "yaml",
             Self::Unknown(lang) => lang,
-        }.to_string()
+        }
+        .to_string()
     }
 
     pub fn display_name(&self) -> String {
@@ -247,6 +247,7 @@ impl ProgrammingLanguage {
             Self::Xml => "devicon-html5-plain",
             Self::Yaml => "devicon-devicon-plain",
             Self::Unknown(_) => "devicon-devicon-plain",
-        }.to_string()
+        }
+        .to_string()
     }
 }

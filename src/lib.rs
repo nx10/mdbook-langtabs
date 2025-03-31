@@ -2,8 +2,8 @@ use mdbook::book::{Book, BookItem};
 use mdbook::errors::Error;
 use mdbook::preprocess::{Preprocessor, PreprocessorContext};
 
-mod preprocessor;
 mod languages;
+mod preprocessor;
 
 pub struct LangTabsPreprocessor;
 
