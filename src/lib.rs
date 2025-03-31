@@ -3,6 +3,7 @@ use mdbook::errors::Error;
 use mdbook::preprocess::{Preprocessor, PreprocessorContext};
 
 mod preprocessor;
+mod languages;
 
 pub struct LangTabsPreprocessor;
 

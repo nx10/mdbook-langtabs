@@ -43,20 +43,6 @@ function initLangTabs() {
             button.addEventListener('click', handleTabClick);
         });
         
-        // Restore user preference localStorage
-        try {
-            const preferredLang = localStorage.getItem('mdbook-langtabs-preference');
-            if (preferredLang) {
-                const preferredButton = container.querySelector(`.langtabs-tab[data-lang="${preferredLang}"]`);
-                if (preferredButton) {
-                    preferredButton.click();
-                    return;
-                }
-            }
-        } catch (e) {
-            // Ignore storage errors
-        }
-        
         // If no tab active select first
         if (!container.querySelector('.langtabs-tab.active')) {
             const firstButton = tabButtons[0];
@@ -87,12 +73,5 @@ function handleTabClick() {
     const activeContent = container.querySelector(`.langtabs-code[data-lang="${lang}"]`);
     if (activeContent) {
         activeContent.classList.add('active');
-    }
-    
-    // Save preference to localStorage
-    try {
-        localStorage.setItem('mdbook-langtabs-preference', lang);
-    } catch (e) {
-        // Ignore storage errors
     }
 }
