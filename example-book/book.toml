@@ -3,10 +3,3 @@ authors = ["Your Name"]
 language = "en"
 src = "src"
 title = "Example Book"
-
-[preprocessor.langtabs]
-command = "mdbook-langtabs"
-
-[output.html]
-additional-css = ["langtabs.css"]
-additional-js = ["langtabs.js"]
