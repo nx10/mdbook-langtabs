@@ -1,4 +1,4 @@
-use mdbook::book::Chapter;
+use mdbook_preprocessor::book::Chapter;
 use regex::Regex;
 
 use crate::languages;

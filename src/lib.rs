@@ -1,6 +1,6 @@
-use mdbook::book::{Book, BookItem};
-use mdbook::errors::Error;
-use mdbook::preprocess::{Preprocessor, PreprocessorContext};
+use mdbook_preprocessor::book::{Book, BookItem};
+use mdbook_preprocessor::errors::Error;
+use mdbook_preprocessor::{Preprocessor, PreprocessorContext};
 
 mod languages;
 mod preprocessor;
@@ -34,7 +34,10 @@ impl Preprocessor for LangTabsPreprocessor {
         Ok(book)
     }
 
-    fn supports_renderer(&self, renderer: &str) -> bool {
-        renderer == "html"
+    fn supports_renderer(
+        &self,
+        renderer: &str,
+    ) -> Result<bool, mdbook_preprocessor::errors::Error> {
+        Ok(renderer == "html")
     }
 }

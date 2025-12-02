@@ -1,6 +1,12 @@
 [book]
 authors = ["Your Name"]
 language = "en"
-multilingual = false
 src = "src"
 title = "Example Book"
+
+[preprocessor.langtabs]
+command = "mdbook-langtabs"
+
+[output.html]
+additional-css = ["langtabs.css"]
+additional-js = ["langtabs.js"]

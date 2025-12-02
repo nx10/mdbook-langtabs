@@ -1,7 +1,8 @@
 use clap::{Arg, Command};
-use mdbook::errors::Error;
-use mdbook::preprocess::{CmdPreprocessor, Preprocessor};
 use mdbook_langtabs::LangTabsPreprocessor;
+use mdbook_preprocessor::errors::Error;
+use mdbook_preprocessor::{Preprocessor, parse_input};
+use semver::{Version, VersionReq};
 use std::fs;
 use std::io;
 use std::path::PathBuf;
@@ -40,7 +41,7 @@ fn main() {
             .expect("Required argument");
         let supported = preprocessor.supports_renderer(renderer);
 
-        if supported {
+        if let Ok(true) = supported {
             process::exit(0);
         } else {
             process::exit(1);
@@ -57,7 +58,22 @@ fn main() {
         }
     } else {
         // Normal preprocessing mode
-        let (ctx, book) = CmdPreprocessor::parse_input(io::stdin()).expect("Failed to parse stdin");
+        let (ctx, book) = parse_input(io::stdin()).expect("Failed to parse stdin");
+
+        let book_version =
+            Version::parse(&ctx.mdbook_version).expect("Failed to parse mdbook version");
+        let version_req = VersionReq::parse(mdbook_preprocessor::MDBOOK_VERSION)
+            .expect("Failed to parse mdbook-preprocessor version");
+
+        if !version_req.matches(&book_version) {
+            eprintln!(
+                "Warning: The {} plugin was built against version {} of mdbook, \
+                but we're being called from version {}",
+                preprocessor.name(),
+                mdbook_preprocessor::MDBOOK_VERSION,
+                ctx.mdbook_version
+            );
+        }
 
         let processed_book = preprocessor
             .run(&ctx, book)

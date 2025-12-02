@@ -1,7 +1,7 @@
 (function loadDeviconCSS() {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css';
+    link.href = 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/devicon.min.css';
     document.head.appendChild(link);
 })();
 
